@@ -1,0 +1,423 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void leerVector(int m[], int lon);
+void escribirVector(int m[], int lon);
+void productoEscalar(int v[], int numero, int longitud);
+void member(int elem, int arr[], int longitud);
+void paresast(char v[], int lon);
+void numVoc(char v[], int lon);
+void tresAst(char v[], int lon);
+void numOcchar(char c, char v[], int lon);
+void tresAstConsec(char v[], int lon);
+void nAstConsec(int n, char v[], int lon);
+void tresGrupAstConsec(char v[], int lon);
+void nGrupAstConsec(int n, char v[], int lon);
+void suma(int v[], int lon);
+void mult(int v[], int lon);
+void memberOrd(int elem, int arr[], int lon);
+void iguales(int v1[], int lon1, int v2[], int lon2);
+int main(){
+
+int opcion;
+
+
+int tam;
+int num;
+int elem;
+char c;
+
+do{
+    printf("9 - Ej9\n10 - Ej10\n11 - Ej11\n12 - Ej12\n");
+    printf("13 - Ej13\n14- Ej14\n15 - Ej15\n16 - Ej16\n");
+    printf("17 - Ej17\n18- Ej18\n19 - Ej19\n20 - Ej20\n");
+    printf("21 - Ej21\n22- Ej22\n23 - Ej23\n24 - Ej24\n");
+    printf("0 - Salir\n"); 
+    printf("Opcion? ");
+    scanf("%d", &opcion);
+
+    if(opcion == 9){
+        printf("Tamaño? ");
+        scanf("%d", &tam);
+        int m[tam];
+        leerVector(m, tam);
+        escribirVector(m, tam);
+    } else if(opcion == 10){
+        int v[tam];
+        productoEscalar(v, num, tam);
+    } else if(opcion == 11){
+        int arr[tam];
+        member(elem, arr, tam);
+    } else if(opcion == 12){
+        char v[tam];
+        paresast(v, tam);
+    } else if(opcion == 13){
+        char v[tam];
+        numVoc(v, tam);
+    } else if(opcion == 14){
+        char v[tam];
+        tresAst(v, tam);
+    } else if(opcion == 15){
+        char v[tam];
+        numOcchar(c, v, tam);
+    } else if(opcion == 16){
+        char v[tam];
+        tresAstConsec(v, tam);
+    } else if(opcion == 17){
+        char v[tam];
+        nAstConsec(num, v, tam);
+    } else if(opcion == 18){
+        char v[tam];
+        tresGrupAstConsec(v, tam);
+    } else if(opcion == 19){
+        char v[tam];
+        nGrupAstConsec(num, v, tam);
+    } else if(opcion == 20){
+        int v[tam];
+        suma(v, tam);
+    } else if(opcion == 21){
+        int v[tam];
+        mult(v, tam);
+    } else if(opcion == 22){
+        int v[tam];
+        memberOrd(num, v, tam);
+    } else if(opcion == 23){
+        int v1[tam];
+        int v2[num];
+        iguales(v1, tam, v2, num);
+    }
+} while(opcion != 0);
+}
+
+void leerVector(int m[], int lon){
+    for(int i = 0; i < lon; i++){
+        printf("Matriz [%d]", i);
+        scanf("%d", &m[i]);
+    } 
+}
+void escribirVector(int m[], int lon){
+    for(int i = 0; i < lon; i++){
+        printf("%d ", m[i]);
+    }
+    printf("\n");
+}
+void productoEscalar(int v[], int numero, int longitud){
+    printf("Tamaño? ");
+    scanf("%d", &longitud);
+    for(int i = 0; i < longitud; i++){
+        printf("posición %d: ", i);
+        scanf("%d", &v[i]);
+
+    }
+    printf("Escalar? ");
+    scanf("%d", &numero);
+    
+    for(int i = 0; i < longitud; i++){
+        v[i]*= numero;
+        printf("%d ", v[i]); 
+    }
+    printf("\n");
+}
+
+void member(int elem, int arr[], int longitud){
+    printf("Tamaño? ");
+    scanf("%d", &longitud);
+    for(int i = 0; i < longitud; i++){
+        printf("Elemento [%d]: ", i);
+        scanf("%d", &arr[i]);
+
+    }
+    printf("Elemento? ");
+    scanf("%d", &elem);
+    for(int i = 0; i < longitud; i++){
+        if(elem == arr[i]){
+            printf("1 ");
+        } else{
+            printf("0 ");
+        }
+    }
+    printf("\n");
+}
+
+void paresast(char v[], int lon){
+    int contandor = 0;
+    printf("Longitud array: ");
+    scanf("%d", &lon);
+    for(int i = 0; i < lon; i++){
+        printf("Introduzca el caracter de la posición %d \n", i);
+        getchar();
+        scanf("%c", &v[i]);
+
+    }
+    for(int i = 0; i < lon; i++){
+        if(i % 2 == 0){
+            if(v[i] == '*'){
+                contandor++;
+            } 
+    }
+    }
+    if(contandor == (lon + 1)/ 2){
+        printf("1\n");
+    } else {
+        printf("0\n");
+    }
+
+}
+
+void numVoc(char v[], int lon){
+    int contador = 0;
+    printf("Escaños? ");
+    scanf("%d", &lon);
+    for (int i = 0; i < lon; i++){
+        printf("Introduzca el caracter de la posición %d \n", i);
+        getchar();
+        v[i] = getchar();
+    }
+    for(int i = 0; i < lon; i++){
+        v[i] = tolower(v[i]);
+        if(v[i] == 'a' || v[i] == 'e' || v[i] == 'i' || v[i] == 'o' || v[i] == 'u'){
+            contador++;
+        }
+
+    }
+    printf("hay %d vocales\n", contador);
+}
+
+void tresAst(char v[], int lon){
+    int contador;
+    printf("Introduzca el array? ");
+    scanf("%d", &lon);
+    for(int i = 0; i < lon; i++){
+        printf("Escaño %d? ", i);
+        getchar();
+        scanf("%c", &v[i]);
+    }
+    for(int i = 0; i < lon; i++){
+        if(v[i] == '*'){
+            contador++;
+        }
+    }
+    if(contador >= 3){
+        printf("1\n");
+    }
+    if(contador == 3){
+        printf("Solo hay 3 *\n");
+    }
+}
+
+void numOcchar(char c, char v[], int lon){
+    int contador = 0;
+    printf("Tamaño del array");
+    scanf("%d", &lon);
+    printf("Caracter? ");
+    getchar();
+    scanf("%c", &c);
+    for(int i = 0; i < lon; i++){
+        printf("Introduzca el valor de %d: ", i);
+        getchar();
+        scanf("%c", &v[i]);
+
+    }
+    for(int i = 0; i < lon; i++){
+        if(c == v[i])
+        contador += 1;
+    }
+    
+    printf("%c ha aparecido %d veces \n", c, contador);
+
+}
+
+void tresAstConsec(char v[], int lon){
+    int contador = 0; 
+    int contador2 = 0;
+    printf("Array? ");
+    scanf("%d", &lon);
+    for(int i = 0; i < lon; i++){
+        printf("Introduca el valor de %d: ", i);
+        getchar();
+        scanf("%c", &v[i]);
+        if(v[i] == '*'){
+            contador += 1;
+        } else {
+            contador = 0;
+        }
+        if(contador >= 3){
+            contador2 = 3;
+        }
+    }
+    if(contador2 == 3){
+        printf("1\n");
+    } else{
+        printf("0\n");
+    }
+}
+void nAstConsec(int n, char v[], int lon){
+    int contador = 0;
+    int contador2 = 0;
+    printf("Introduzca tam array? ");
+    scanf("%d", &lon);
+    printf("Numero de cons de * ");
+    scanf("%d", &n);
+    for(int i = 0; i < lon; i++){
+        printf("introduzca el valor de %d:  ", i);
+        getchar();
+        scanf("%c", &v[i]);
+        if(v[i] == '*'){
+            contador += 1;
+        } else {
+            contador = 0;
+        }
+        if(contador == n){
+            contador2 = 1;
+        }
+    }
+    if(contador2 == 1){
+        printf("1\n");
+    } else {
+        printf("0\n");
+    }
+}
+void tresGrupAstConsec(char v[], int lon){
+    int contador = 0;
+    int grupos = 0;
+    printf("Array? ");
+    scanf("%d", &lon);
+    for(int i = 0; i < lon; i++){
+        printf("Introduzca el valor de %d: ", i);
+        getchar();
+        scanf("%c", &v[i]);
+        if(v[i] == '*'){
+            contador += 1;
+        } else {
+            contador = 0;
+        }
+        if(contador == 3){
+            grupos += 1;
+            contador = 0;
+        }
+    }
+    
+    printf("%d\n", grupos);
+    
+}
+void nGrupAstConsec(int n, char v[], int lon){
+    int contador = 0;
+    int grupo = 0;
+    printf("Array? ");
+    scanf("%d", &lon);
+    printf("* consecutivos? ");
+    scanf("%d", &n);
+    for(int i = 0; i < lon; i++){
+        printf("Caracter en %d", i);
+        getchar();
+        scanf("%c", &v[i]);
+        if(v[i] == '*'){
+            contador +=1;
+        } else {
+            contador = 0;
+        }
+        if(contador == n){
+            grupo += 1;
+            contador = 0;
+        }
+    }
+    printf("Hay %d grupos de %d consecutivos\n", grupo, n);
+}
+void suma(int v[], int lon){
+    int suma = 0;
+    printf("Array? ");
+    scanf("%d", &lon);
+    for(int i = 0; i < lon; i++){
+        printf("Introduzca el valor de %d: ", i);
+        scanf("%d", &v[i]);
+        suma += v[i];
+        }
+    printf("%d\n", suma);
+
+}
+void mult(int v[], int lon){
+    int mult = 1;
+    printf("Array? ");
+    scanf("%d", &lon);
+    for(int i = 0; i < lon; i++){
+        printf("Array en %d? ", i);
+        scanf("%d", &v[i]);
+        mult *= v[i];
+
+    }
+    printf("la multiplicación del array es %d\n", mult);
+}
+void memberOrd(int elem, int arr[], int lon){
+    int medio = 0;
+    int menor = 999;
+    int afirmativo = 0;
+    printf("Array? ");
+    scanf("%d", &lon);
+    printf("Element? ");
+    scanf("%d", &elem);
+    for(int i = 0; i < lon; i++){
+        printf("posción %d? ", i);
+        scanf("%d", &arr[i]);
+        if(arr[i] == elem){
+            medio = 1;
+            afirmativo = 1;
+        } 
+    }
+    //preguntar sobre este algoritmo de ordenacón llamado bubble sort, ya no entiendo del todo como se llega a intercambiar los valores
+      for (int i = 0; i < lon - 1; i++) {
+        for (int j = 0; j < lon - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Intercambiar los elementos si están en el orden incorrecto
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+     // Mostrar el array ordenado
+    printf("Array ordenado: ");
+    for (int i = 0; i < lon; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    // for(int i = 0; i < lon; i++){
+    //     if(arr[i] <= menor){
+    //         menor = arr[i];
+    //     } else if (menor <= arr[i]){
+    //         arr[i] = menor;
+    //     }
+    //     printf("%d ", arr[i]);
+
+    // }
+    printf("%d\n", afirmativo);
+}
+
+void iguales(int v1[], int lon1, int v2[], int lon2){
+    printf("Array 1? ");
+    scanf("%d", &lon1);
+    printf("Array 2 ");
+    scanf("%d", &lon2);
+    for(int i = 0; i < lon1; i++){
+        printf("Array en %d ", i);
+        scanf("%d", &v1[i]);
+    }
+    for(int i = 0; i < lon2; i++){
+        printf("Array en %d ", i);
+        scanf("%d", &v2[i]);
+    }
+    if(v1[lon1] != v2[lon2]){
+        printf("No son iguales\n");
+    }
+    for(int i = 0; i < lon1; i++){
+        printf("%d", v1[i]);
+        printf("\n");
+        printf("%d", v2[i]);
+        printf("\n");
+        // if(v1[i] != v2[i]){
+           
+        // } else {
+        //     printf("No son iguales\n");
+        // }
+    }
+}
