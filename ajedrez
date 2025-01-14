@@ -1,0 +1,94 @@
+#include <stdio.h>
+
+void matriz(int number, char v[number][number]);
+void relleno(int number, char v[number][number]);
+// void relleno(int number, int r, int r2, char v[number][number]);
+void reina(int number, int r, int r2, char v[number][number]);
+void matriz(int number, char v[number][number]);
+void asteriscos(int number, int r, int r2, char v[number][number]);
+
+int main(){
+int number = 0;
+int r = 0;
+int r2 = 0;
+
+
+printf("Arrays? ");
+scanf("%d", &number);
+
+
+char v[number][number];
+
+relleno(number, v);
+matriz(number, v);
+
+printf("\n Reina1 ");
+scanf("%d", &r);
+printf("\n Reina2 ");
+scanf("%d", &r2);
+
+r--;
+r2--;
+
+reina(number, r, r2, v);
+matriz(number, v);
+asteriscos(number, r, r2, v);
+reina(number, r, r2, v);
+matriz(number, v);
+
+}
+void matriz(int number, char v[number][number]){
+    for(int i = 0; i < number; i++){
+        for(int j = 0; j < number; j++){
+            printf("%c ", v[i][j]);
+        }
+        printf("\n");
+    }
+}
+void relleno(int number, char v[number][number]){
+    for(int i = 0; i < number; i++){
+        for(int j = 0; j < number; j++){
+            if((i + j) % 2 == 0){
+                v[i][j] = 'b';
+            } else if ((i + j) % 2 != 0){
+                v[i][j] = 'n';
+            }
+            
+        }
+        
+    }
+}
+void reina(int number, int r, int r2, char v[number][number]){
+    for(int i = 0; i < number; i++){
+        for(int j = 0; j < number; j++){
+            if(r == i && r2 == j){
+                v[i][j] = 'R';
+                
+            }
+        }
+    }
+   
+}
+void asteriscos(int number, int r, int r2, char v[number][number]){
+    for(int i = 0; i < number; i++){
+        v[i][r2] = '*';  // Toda la columna
+
+        // Movimiento horizontal (misma fila)
+        v[r][i] = '*';  // Toda la fila
+         // Movimiento diagonal superior izquierda a inferior derecha
+        if (r + i < number && r2 + i < number) {
+            v[r + i][r2 + i] = '*';
+        }
+        if (r - i >= 0 && r2 - i >= 0) {
+            v[r - i][r2 - i] = '*';
+        }
+
+        // Movimiento diagonal inferior izquierda a superior derecha
+        if (r + i < number && r2 - i >= 0) {
+            v[r + i][r2 - i] = '*';
+        }
+        if (r - i >= 0 && r2 + i < number) {
+            v[r - i][r2 + i] = '*';
+        }
+    }
+    }
